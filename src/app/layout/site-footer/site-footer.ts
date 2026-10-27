@@ -1,6 +1,6 @@
 /**
  * RODAPÉ
- * Logo (em branco), descrição, redes sociais, "Links úteis" e contato,
+ * Logo, descrição, redes sociais, "Links úteis" e contato,
  * com razão social e CNPJ na linha final — mesma estrutura do site atual.
  */
 import { NgOptimizedImage } from '@angular/common';

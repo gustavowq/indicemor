@@ -12,11 +12,10 @@
     padding: 76px 0 52px;
   }
 
-  // Logo convertida para branco sobre o fundo escuro
+  // Preserva as cores e o fundo branco da imagem enviada, inclusive no rodapé escuro.
   &__logo {
-    height: 72px;
-    width: auto;
-    filter: brightness(0) invert(1);
+    width: 200px;
+    height: auto;
   }
 
   &__brand p {
