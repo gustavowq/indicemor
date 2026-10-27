@@ -1,0 +1,39 @@
+<!-- ÚLTIMAS NOTÍCIAS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Notícias</span>
+        <h2 class="title-xl">Últimas publicações</h2>
+      </div>
+      <a class="btn btn--outline" routerLink="/noticias"
+        >Ver todas as notícias <app-icon name="arrow-right" [size]="18"
+      /></a>
+    </div>
+
+    <div class="grid grid--2">
+      @for (post of posts; track post.slug; let i = $index) {
+        <article class="card news-card">
+          <div class="news-card__cover" [class.news-card__cover--green]="i % 2 === 1">
+            <app-icon
+              [name]="i % 2 === 0 ? 'bar-chart' : 'landmark'"
+              [size]="60"
+              [strokeWidth]="1.5"
+            />
+            <span class="tag tag--white news-card__tag">{{ post.category }}</span>
+          </div>
+          <div class="news-card__body">
+            <time class="news-card__date" [attr.datetime]="post.date">
+              <app-icon name="calendar" [size]="15" /> {{ post.date | date: "d 'de' MMMM 'de' y" }}
+            </time>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.excerpt }}</p>
+            <a class="news-card__link" [href]="post.url"
+              >Leia mais <app-icon name="arrow-right" [size]="16"
+            /></a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<!-- SERVIÇOS (resumo na página inicial) -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Serviços</span>
+        <h2 class="title-xl">Soluções para ampliar receitas <br />e fortalecer a gestão.</h2>
+      </div>
+      <a class="btn btn--outline" routerLink="/servicos"
+        >Ver todos os serviços <app-icon name="arrow-right" [size]="18"
+      /></a>
+    </div>
+
+    <!-- Grupo principal (inteligência fiscal) em linha inteira; demais grupos lado a lado -->
+    <div class="services-layout">
+      @for (row of rows; track $index) {
+        <div class="services-row" [style.--row-cols]="row.columns">
+          @for (group of row.groups; track group.id) {
+            <div class="services-group" [style.--group-cols]="group.services.length">
+              <div class="services-group__head">
+                <h3 class="services-group__title">{{ group.label }}</h3>
+                <span class="services-group__line" aria-hidden="true"></span>
+              </div>
+              <div class="services-group__grid">
+                @for (service of group.services; track service.slug; let i = $index) {
+                  <app-service-card [service]="service" [accent]="i % 2 === 0 ? 'green' : 'blue'" />
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

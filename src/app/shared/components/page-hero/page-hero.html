@@ -1,0 +1,24 @@
+<!-- Hero das páginas internas -->
+<section class="page-hero">
+  <span class="page-hero__corner page-hero__corner--top" aria-hidden="true"></span>
+  @if (bottomCorner()) {
+    <span class="page-hero__corner page-hero__corner--bottom" aria-hidden="true"></span>
+  }
+
+  <div class="container page-hero__inner">
+    <!-- Trilha de navegação -->
+    <nav class="page-hero__crumb" aria-label="Você está em">
+      <a routerLink="/"><app-icon name="home" [size]="14" /> Início</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ breadcrumb() }}</span>
+    </nav>
+
+    <span class="eyebrow eyebrow--light">{{ eyebrow() }}</span>
+    <h1 class="page-hero__title">{{ title() }}</h1>
+    @if (lead()) {
+      <p class="page-hero__lead">{{ lead() }}</p>
+    }
+
+    <ng-content />
+  </div>
+</section>

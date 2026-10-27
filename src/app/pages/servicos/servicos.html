@@ -1,0 +1,112 @@
+<app-page-hero
+  breadcrumb="Serviços"
+  eyebrow="Serviços"
+  title="Inteligência fiscal e tecnologia para ampliar receitas e fortalecer a gestão."
+  [bottomCorner]="false"
+  lead="A ÍNDICEMOR é especializada em inteligência fiscal municipal, atuando de forma estratégica para ampliar receitas, corrigir distorções e fortalecer a autonomia financeira das prefeituras."
+>
+  <!-- Atalhos para cada serviço -->
+  <nav class="chips service-shortcuts" aria-label="Ir para o serviço">
+    @for (s of services; track s.slug) {
+      <a class="chip chip--on-dark" routerLink="/servicos" [fragment]="s.slug"
+        ><app-icon [name]="s.icon" [size]="16" /> {{ s.name }}</a
+      >
+    }
+  </nav>
+</app-page-hero>
+
+<!-- FAIXA DE IMPACTO -->
+<div class="impact-strip">
+  <div class="container impact-strip__inner">
+    <p class="impact-strip__main">
+      Para municípios do interior, cada ponto percentual no índice de participação ou cada melhoria
+      na arrecadação representa investimento direto em
+      <span>saúde, educação, infraestrutura e desenvolvimento local.</span>
+    </p>
+    <p class="impact-strip__aside">
+      Por isso, entregamos soluções técnicas, seguras e orientadas a resultado.
+    </p>
+  </div>
+</div>
+
+<!-- SERVIÇOS POR CATEGORIA -->
+@for (category of categories; track category.id) {
+  <div class="category" [id]="'categoria-' + category.id">
+    <div class="container category__head">
+      <span class="eyebrow">{{ category.label }}</span>
+      <p>{{ category.description }}</p>
+    </div>
+  </div>
+
+  @for (service of category.services; track service.slug) {
+    @let n = indexOf(service.slug);
+    @let green = n % 2 === 0;
+    <section class="section service" [class.section--surface]="n % 2 === 1" [id]="service.slug">
+      <div class="container split" [class.service--reverse]="n % 2 === 1">
+        <!-- Texto do serviço -->
+        <div class="service__text">
+          <div class="service__meta">
+            <span class="icon-box" [class.icon-box--green]="green"
+              ><app-icon [name]="service.icon" [size]="24"
+            /></span>
+            <span class="tag" [class.tag--green]="green">{{ service.audience }}</span>
+          </div>
+          <h2 class="service__name">{{ service.name }}</h2>
+          @if (service.fullName) {
+            <p class="service__full" [class.service__full--green]="green">{{ service.fullName }}</p>
+          }
+
+          @if (service.comingSoon) {
+            <p class="service__desc service__desc--soon">
+              Estamos preparando as informações completas deste serviço. Fale com a nossa equipe
+              para saber mais.
+            </p>
+          } @else {
+            <p class="service__desc">{{ service.description }}</p>
+          }
+
+          <a
+            class="btn btn--primary btn--sm service__cta"
+            [routerLink]="quote.path"
+            [queryParams]="{ servico: service.slug }"
+          >
+            {{ quote.label }} <app-icon name="arrow-right" [size]="16" />
+          </a>
+        </div>
+
+        <!-- Destaques do serviço -->
+        <div class="highlights bracket">
+          @if (service.comingSoon || service.highlights.length === 0) {
+            <div class="highlights__soon">
+              <span class="icon-box icon-box--lg"
+                ><app-icon name="clipboard-check" [size]="28"
+              /></span>
+              <strong>Detalhes em breve</strong>
+              <p>Os principais pontos do {{ service.name }} serão publicados aqui.</p>
+            </div>
+          } @else {
+            <span class="highlights__title" [class.highlights__title--blue]="!green">{{
+              service.highlightsTitle
+            }}</span>
+            <ul class="highlights__list">
+              @for (item of service.highlights; track item) {
+                <li>
+                  <span class="highlights__check" [class.highlights__check--blue]="!green"
+                    ><app-icon name="check" [size]="15" [strokeWidth]="3"
+                  /></span>
+                  {{ item }}
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </div>
+    </section>
+  }
+}
+
+<div class="spacer"></div>
+<app-cta-band
+  title="Quer saber qual solução atende a sua necessidade?"
+  text="Envie seu pedido de cotação ou fale com a nossa equipe pelo WhatsApp."
+/>

@@ -1,0 +1,179 @@
+<section class="quote">
+  <!-- Faixa azul de fundo do topo -->
+  <div class="quote__band" aria-hidden="true"></div>
+
+  <div class="container quote__grid">
+    <div class="quote__left">
+      <!-- CABEÇALHO -->
+      <div class="quote__head">
+        <nav class="quote__crumb" aria-label="Você está em">
+          <a routerLink="/"><app-icon name="home" [size]="14" /> Início</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Solicitar Cotação</span>
+        </nav>
+        <span class="eyebrow eyebrow--light">Envie seu pedido</span>
+        <h1 class="quote__title">Solicite uma cotação.</h1>
+        <p class="quote__lead">
+          Conte qual serviço interessa a você e nossa equipe entra em contato.
+        </p>
+      </div>
+
+      <!-- LISTA DE SERVIÇOS + CONTATO DIRETO -->
+      <aside class="quote__aside">
+        <span class="quote__label">Nossos serviços</span>
+        <ul class="quote__services">
+          @for (s of services; track s.slug; let i = $index) {
+            <li class="card quote__service">
+              <span class="icon-box icon-box--sm" [class.icon-box--green]="i % 2 === 0"
+                ><app-icon [name]="s.icon" [size]="20"
+              /></span>
+              <div>
+                <strong>{{ s.name }}</strong>
+                <span>{{ s.fullName || 'Detalhes em breve' }}</span>
+              </div>
+            </li>
+          }
+        </ul>
+
+        <div class="quote__direct">
+          <strong>Prefere falar agora?</strong>
+          <a [href]="company.whatsappHref" target="_blank" rel="noopener"
+            ><app-icon name="message-circle" [size]="18" /> WhatsApp: {{ company.phoneDisplay }}</a
+          >
+          <span><app-icon name="clock" [size]="18" /> {{ company.hours.weekdays }}</span>
+        </div>
+      </aside>
+    </div>
+
+    <!-- FORMULÁRIO -->
+    <form
+      class="card card--elevated form-card quote__form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <h2 class="form-card__title">Envie seu pedido</h2>
+      <p class="form-card__hint">Campos com * são obrigatórios.</p>
+
+      <div class="form-grid">
+        <div class="field" [class.field--invalid]="error('nome')">
+          <label for="q-nome">Nome *</label>
+          <input
+            id="q-nome"
+            type="text"
+            formControlName="nome"
+            placeholder="Seu nome"
+            autocomplete="name"
+          />
+          @if (error('nome'); as msg) {
+            <span class="field__error">{{ msg }}</span>
+          }
+        </div>
+
+        <div class="field" [class.field--invalid]="error('telefone')">
+          <label for="q-tel">Telefone *</label>
+          <input
+            id="q-tel"
+            type="tel"
+            formControlName="telefone"
+            mask="(00) 0000-00009"
+            placeholder="(62) 99999-9999"
+            autocomplete="tel"
+          />
+          @if (error('telefone'); as msg) {
+            <span class="field__error">{{ msg }}</span>
+          }
+        </div>
+
+        <div class="field" [class.field--invalid]="error('email')">
+          <label for="q-email">E-mail *</label>
+          <input
+            id="q-email"
+            type="email"
+            formControlName="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+          />
+          @if (error('email'); as msg) {
+            <span class="field__error">{{ msg }}</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="q-mun">Município / Empresa</label>
+          <input
+            id="q-mun"
+            type="text"
+            formControlName="municipio"
+            placeholder="Ex.: Prefeitura de Hidrolândia - GO"
+          />
+        </div>
+      </div>
+
+      <!-- Serviços de interesse (seleção múltipla) -->
+      <fieldset class="field form-row">
+        <legend class="field__label">Serviço de interesse</legend>
+        <div class="chips">
+          @for (s of services; track s.slug) {
+            <button
+              type="button"
+              class="chip"
+              [class.chip--active]="isSelected(s.slug)"
+              [attr.aria-pressed]="isSelected(s.slug)"
+              (click)="toggleService(s.slug)"
+            >
+              @if (isSelected(s.slug)) {
+                <app-icon name="check" [size]="15" [strokeWidth]="3" />
+              }
+              {{ s.name }}
+            </button>
+          }
+        </div>
+      </fieldset>
+
+      <div class="field form-row" [class.field--invalid]="error('assunto')">
+        <label for="q-assunto">Assunto *</label>
+        <input
+          id="q-assunto"
+          type="text"
+          formControlName="assunto"
+          placeholder="Como podemos ajudar?"
+        />
+        @if (error('assunto'); as msg) {
+          <span class="field__error">{{ msg }}</span>
+        }
+      </div>
+
+      <div class="field form-row">
+        <label for="q-msg">Mensagem</label>
+        <textarea
+          id="q-msg"
+          formControlName="mensagem"
+          placeholder="Descreva brevemente a sua necessidade"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn--primary btn--block form-row"
+        [disabled]="state() === 'sending'"
+      >
+        {{ state() === 'sending' ? 'Enviando…' : 'Enviar pedido de cotação' }}
+        <app-icon name="send" [size]="18" />
+      </button>
+
+      <!-- Retorno do envio -->
+      @if (state() === 'success') {
+        <p class="form-feedback form-feedback--success" role="status">
+          <app-icon name="check-circle" [size]="20" /> Pedido enviado! Nossa equipe entrará em
+          contato.
+        </p>
+      } @else if (state() === 'error') {
+        <p class="form-feedback form-feedback--error" role="alert">
+          <app-icon name="alert-triangle" [size]="20" /> Não foi possível enviar agora. Tente
+          novamente ou fale pelo WhatsApp.
+        </p>
+      }
+    </form>
+  </div>
+</section>

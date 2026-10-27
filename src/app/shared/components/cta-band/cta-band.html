@@ -1,0 +1,27 @@
+<!-- Chamada para ação de fim de página -->
+<section class="cta">
+  <div class="container">
+    <div class="cta__box">
+      <div class="cta__text">
+        <h2 class="cta__title">{{ title() }}</h2>
+        @if (text()) {
+          <p>{{ text() }}</p>
+        }
+      </div>
+
+      <div class="cta__actions">
+        <a class="btn btn--primary" [routerLink]="primaryPath()">
+          {{ primaryLabel() }} <app-icon name="arrow-right" [size]="18" />
+        </a>
+
+        @if (secondaryPath(); as path) {
+          <a class="btn btn--outline-light" [routerLink]="path">{{ secondaryLabel() }}</a>
+        } @else {
+          <a class="btn btn--outline-light" [href]="whatsappHref" target="_blank" rel="noopener">
+            <app-icon name="message-circle" [size]="18" /> {{ secondaryLabel() }}
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</section>

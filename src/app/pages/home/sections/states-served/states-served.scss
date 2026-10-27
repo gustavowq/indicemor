@@ -1,0 +1,43 @@
+@use 'mixins' as *;
+
+.states {
+  &__lead {
+    margin-bottom: 30px;
+  }
+
+  &__card {
+    margin-bottom: 16px;
+    padding: 26px;
+
+    .chips {
+      margin-top: 14px;
+    }
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  &__cta {
+    margin-top: 14px;
+  }
+
+  &__map {
+    padding: 36px;
+    border: 1px solid var(--c-line);
+    border-radius: 18px;
+    background: var(--c-white);
+
+    @include mobile {
+      padding: 20px;
+    }
+  }
+}

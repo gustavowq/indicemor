@@ -1,0 +1,29 @@
+<!-- Card de serviço -->
+<article
+  class="service-card"
+  [class.service-card--green]="accent() === 'green'"
+  [class.service-card--soon]="service().comingSoon"
+>
+  <div class="service-card__top">
+    <span class="icon-box" [class.icon-box--green]="accent() === 'green'">
+      <app-icon [name]="service().icon" [size]="24" />
+    </span>
+    <span class="service-card__audience">{{ service().audience }}</span>
+  </div>
+
+  <h3 class="service-card__name">{{ service().name }}</h3>
+  @if (service().fullName) {
+    <p class="service-card__full">{{ service().fullName }}</p>
+  }
+
+  @if (service().comingSoon) {
+    <p class="service-card__summary service-card__summary--soon">Detalhes em breve.</p>
+  } @else {
+    <p class="service-card__summary">{{ service().summary }}</p>
+  }
+
+  <a class="service-card__link" routerLink="/servicos" [fragment]="service().slug">
+    {{ service().comingSoon ? 'Fale com a equipe' : 'Saiba mais' }}
+    <app-icon name="arrow-right" [size]="16" />
+  </a>
+</article>

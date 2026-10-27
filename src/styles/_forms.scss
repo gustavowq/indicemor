@@ -1,0 +1,156 @@
+// =============================================================================
+// FORMULÁRIOS
+// Campos, rótulos, mensagens de erro e área de upload usados em
+// Solicitar Cotação, Trabalhe Conosco e Contato.
+// =============================================================================
+@use 'mixins' as *;
+
+.form-card {
+  padding: 44px;
+
+  &__title {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--c-ink);
+  }
+
+  &__hint {
+    color: var(--c-muted);
+    margin: 4px 0 28px;
+  }
+
+  @include mobile {
+    padding: 24px;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-row {
+  margin-top: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label,
+  .field__label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border: 1.5px solid #d3dbe5;
+    border-radius: var(--radius-sm);
+    background: var(--c-white);
+    font: inherit;
+    font-size: 15.5px;
+    color: var(--c-ink);
+    transition: border-color 0.15s ease;
+
+    &::placeholder {
+      color: #8994a1;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--c-blue);
+      box-shadow: 0 0 0 3px var(--c-blue-soft);
+    }
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235a6573' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+
+  textarea {
+    height: 120px;
+    padding-top: 14px;
+    resize: vertical;
+  }
+
+  &--invalid {
+    input,
+    select,
+    textarea {
+      border-color: #d23c3c;
+    }
+  }
+
+  &__error {
+    font-size: 13px;
+    color: #c42f2f;
+  }
+}
+
+// Área de upload (Trabalhe Conosco)
+.dropzone {
+  display: block;
+  border: 2px dashed #c9d3de;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  background: var(--c-surface);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+
+  &:hover,
+  &--active {
+    border-color: var(--c-blue);
+  }
+
+  &__text {
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--c-ink);
+  }
+
+  &__link {
+    color: var(--c-blue);
+  }
+
+  app-icon {
+    color: var(--c-blue);
+    display: inline-block;
+  }
+}
+
+// Mensagem exibida após o envio de um formulário
+.form-feedback {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 15.5px;
+
+  &--success {
+    background: var(--c-green-soft);
+    color: #0b5d16;
+  }
+
+  &--error {
+    background: #fdecec;
+    color: #9b2222;
+  }
+}

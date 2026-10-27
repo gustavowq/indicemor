@@ -1,0 +1,11 @@
+// =============================================================================
+// ESTILOS GLOBAIS — ponto de entrada
+// A ordem importa: tokens → base → layout → componentes → formulários.
+// A fonte Lato (400, 700 e 900) é carregada pelo angular.json via @fontsource.
+// Estilos específicos de cada tela ficam no .scss do próprio componente.
+// =============================================================================
+@use 'styles/tokens';
+@use 'styles/base';
+@use 'styles/layout';
+@use 'styles/components';
+@use 'styles/forms';

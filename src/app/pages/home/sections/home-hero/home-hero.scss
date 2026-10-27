@@ -1,0 +1,174 @@
+@use 'mixins' as *;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--g-brand);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @include grid-pattern;
+  }
+
+  &__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+    padding-top: 92px;
+    padding-bottom: 112px;
+  }
+
+  &__title {
+    margin: 20px 0 22px;
+    font-size: 56px;
+    line-height: 1.08;
+    color: var(--c-white);
+  }
+
+  &__highlight {
+    color: var(--c-green-light);
+  }
+
+  &__lead {
+    max-width: 560px;
+    font-size: 20px;
+    color: var(--c-on-dark);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  &__pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 38px;
+    font-size: 15px;
+    color: var(--c-on-dark);
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    app-icon {
+      color: var(--c-green-light);
+    }
+  }
+
+  &__visual {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @include tablet-down {
+    &__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    &__visual {
+      justify-content: center;
+    }
+  }
+
+  @include mobile {
+    &__grid {
+      padding-top: 52px;
+      padding-bottom: 72px;
+      gap: 48px;
+    }
+    &__title {
+      font-size: 38px;
+    }
+    &__lead {
+      font-size: 17px;
+    }
+    &__actions {
+      flex-direction: column;
+    }
+    &__pillars {
+      flex-direction: column;
+    }
+  }
+}
+
+// Cartão ilustrativo
+.index-card {
+  width: 520px;
+  max-width: 100%;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--c-white);
+  box-shadow: 0 40px 80px -30px rgba(0, 20, 50, 0.6);
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__kicker {
+    display: block;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  &__title {
+    display: block;
+    margin-top: 2px;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--c-ink);
+    line-height: 1.3;
+  }
+
+  &__chart {
+    width: 100%;
+    height: auto;
+    margin-top: 18px;
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--c-surface);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--c-ink);
+    }
+
+    app-icon {
+      color: var(--c-green);
+    }
+  }
+
+  @include mobile {
+    padding: 20px;
+
+    &__items {
+      grid-template-columns: 1fr;
+    }
+  }
+}

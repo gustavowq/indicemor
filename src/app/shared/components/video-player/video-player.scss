@@ -1,0 +1,74 @@
+@use 'mixins' as *;
+
+.video {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(130deg, var(--c-blue-dark), var(--c-black));
+
+  @include mobile {
+    aspect-ratio: 4 / 3;
+  }
+
+  &__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  &__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    text-align: left;
+    @include grid-pattern(0.05);
+
+    &:hover .video__play {
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+  }
+
+  &__play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-green);
+    color: var(--c-white);
+    box-shadow: 0 0 0 16px rgba(0, 169, 45, 0.22);
+    transition: transform 0.2s ease;
+  }
+
+  &__caption {
+    position: absolute;
+    left: 44px;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @include mobile {
+      left: 24px;
+      bottom: 24px;
+    }
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--c-white);
+
+    @include mobile {
+      font-size: 24px;
+    }
+  }
+}

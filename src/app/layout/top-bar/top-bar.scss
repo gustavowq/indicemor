@@ -1,0 +1,52 @@
+@use 'mixins' as *;
+
+.top-bar {
+  background: var(--c-black);
+  color: #c3cad3;
+  font-size: 13.5px;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    app-icon {
+      color: var(--c-green-bright);
+    }
+  }
+
+  a:hover {
+    color: var(--c-white);
+  }
+
+  &__social {
+    display: inline-flex;
+    gap: 14px;
+  }
+
+  @include tablet-down {
+    &__inner > .top-bar__item {
+      display: none;
+    }
+    &__inner {
+      justify-content: flex-end;
+    }
+  }
+
+  @include mobile {
+    display: none;
+  }
+}

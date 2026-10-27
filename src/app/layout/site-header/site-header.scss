@@ -1,0 +1,142 @@
+@use 'mixins' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--c-white);
+  border-bottom: 1px solid var(--c-line);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 88px;
+  }
+
+  &__logo img {
+    height: 72px;
+    width: auto;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #38414c;
+
+    a {
+      position: relative;
+      padding: 6px 0;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: var(--c-blue);
+      }
+
+      // Indicador verde da página atual
+      &.is-active {
+        color: var(--c-blue);
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -30px;
+          height: 3px;
+          border-radius: 3px 3px 0 0;
+          background: var(--c-green);
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .is-current {
+      box-shadow:
+        0 0 0 3px var(--c-white),
+        0 0 0 5px var(--c-green);
+    }
+  }
+
+  &__burger {
+    display: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-blue-soft);
+    color: var(--c-blue);
+  }
+
+  // Abaixo de 1180px o menu completo não cabe: usa o menu do celular
+  @media (max-width: 1180px) {
+    &__nav,
+    &__actions {
+      display: none;
+    }
+    &__burger {
+      display: flex;
+    }
+  }
+
+  @include mobile {
+    &__inner {
+      height: 72px;
+    }
+    &__logo img {
+      height: 50px;
+    }
+  }
+}
+
+.mobile-menu {
+  border-top: 1px solid var(--c-line);
+  background: var(--c-white);
+  box-shadow: 0 24px 40px -24px rgba(0, 30, 70, 0.35);
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 16px;
+    padding-bottom: 24px;
+
+    > a:not(.btn):not(.mobile-menu__contact) {
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--c-line);
+      font-weight: 700;
+      color: var(--c-ink);
+
+      &.is-active {
+        color: var(--c-blue);
+      }
+    }
+
+    .btn {
+      margin-top: 12px;
+    }
+  }
+
+  &__contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--c-muted);
+
+    app-icon {
+      color: var(--c-green);
+    }
+  }
+}

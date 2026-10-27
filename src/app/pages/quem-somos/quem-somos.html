@@ -1,0 +1,99 @@
+<app-page-hero
+  breadcrumb="Quem Somos"
+  eyebrow="Quem Somos"
+  title="Soluções estratégicas para a gestão pública municipal."
+  lead="Apoiamos prefeituras na modernização administrativa, na otimização de recursos e na melhoria dos serviços prestados à população."
+/>
+
+<!-- ATUAÇÃO + DIFERENCIAIS -->
+<section class="section">
+  <div class="container split about">
+    <div>
+      <span class="eyebrow">Nossa atuação</span>
+      <h2 class="title-xl">Mais do que prestadores de serviço, parceiros da gestão pública.</h2>
+      @for (p of paragraphs; track $index) {
+        <p class="text-muted about__p">{{ p }}</p>
+      }
+    </div>
+
+    <div class="differentials bracket">
+      <span class="differentials__label">Nossos diferenciais</span>
+      @for (d of differentials; track d.title; let i = $index) {
+        <div class="differentials__item">
+          <span class="icon-box" [class.icon-box--green]="i % 2 === 0"
+            ><app-icon [name]="d.icon" [size]="24"
+          /></span>
+          <div>
+            <strong>{{ d.title }}</strong>
+            <p>{{ d.text }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- MISSÃO E VISÃO -->
+<section class="section section--surface">
+  <div class="container grid grid--2">
+    <article class="card statement statement--green">
+      <div class="statement__head">
+        <span class="icon-box icon-box--green"><app-icon name="target" [size]="26" /></span>
+        <h2>Missão</h2>
+      </div>
+      <p>{{ mission }}</p>
+    </article>
+    <article class="card statement">
+      <div class="statement__head">
+        <span class="icon-box"><app-icon name="eye" [size]="26" /></span>
+        <h2>Visão</h2>
+      </div>
+      <p>{{ vision }}</p>
+    </article>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="eyebrow">Valores</span>
+      <h2 class="title-xl">O que orienta o nosso trabalho.</h2>
+    </div>
+    <div class="grid grid--3 values">
+      @for (v of values; track v.title; let i = $index) {
+        <article class="card">
+          <span class="icon-box" [class.icon-box--green]="i % 2 === 0"
+            ><app-icon [name]="v.icon" [size]="24"
+          /></span>
+          <h3>{{ v.title }}</h3>
+          <p>{{ v.text }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- DADOS DA EMPRESA -->
+<section class="section section--surface section--tight">
+  <div class="container split company">
+    <div>
+      <span class="eyebrow">Dados da empresa</span>
+      <h2 class="title-xl">{{ legalName }}</h2>
+    </div>
+    <dl class="grid grid--2 company__facts">
+      @for (fact of companyFacts; track fact.label) {
+        <div class="card company__fact">
+          <dt>{{ fact.label }}</dt>
+          <dd>{{ fact.value }}</dd>
+        </div>
+      }
+    </dl>
+  </div>
+</section>
+
+<div class="spacer"></div>
+<app-cta-band
+  title="Vamos fortalecer a gestão do seu município?"
+  text="Fale com a nossa equipe e envie seu pedido de cotação."
+/>

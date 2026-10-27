@@ -1,0 +1,95 @@
+@use 'mixins' as *;
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 88px;
+  background: var(--g-brand);
+  color: var(--c-on-dark);
+
+  // Grade quadriculada que some à esquerda
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @include grid-pattern;
+    mask-image: linear-gradient(90deg, transparent 30%, #000);
+  }
+
+  &__inner {
+    position: relative;
+  }
+
+  // Cantoneiras verdes inspiradas na logo
+  &__corner--top {
+    @include bracket-corner(top-right, 300px, 180px);
+    right: 120px;
+    top: 60px;
+  }
+
+  &__corner--bottom {
+    @include bracket-corner(bottom-left, 220px, 120px);
+    right: 300px;
+    bottom: 44px;
+  }
+
+  &__crumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #b9d0ec;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      &:hover {
+        color: var(--c-white);
+      }
+    }
+
+    [aria-current] {
+      color: var(--c-white);
+      font-weight: 700;
+    }
+  }
+
+  &__title {
+    margin-top: 16px;
+    max-width: 780px;
+    font-size: 52px;
+    line-height: 1.1;
+    color: var(--c-white);
+  }
+
+  &__lead {
+    margin-top: 20px;
+    max-width: 700px;
+    font-size: 19px;
+  }
+
+  @include mobile {
+    padding: 52px 0 60px;
+
+    &__title {
+      font-size: 34px;
+    }
+
+    &__lead {
+      font-size: 17px;
+    }
+
+    &__corner--top {
+      right: -120px;
+      top: 20px;
+      width: 200px;
+      height: 120px;
+    }
+
+    &__corner--bottom {
+      display: none;
+    }
+  }
+}

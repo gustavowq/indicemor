@@ -1,0 +1,123 @@
+@use 'mixins' as *;
+
+.about {
+  grid-template-columns: 1.1fr 1fr;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+
+  &__p {
+    margin-bottom: 16px;
+  }
+}
+
+// Bloco "Nossos diferenciais"
+.differentials {
+  padding: 40px;
+  border-radius: 16px;
+  background: var(--c-surface);
+
+  &__label {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-blue);
+  }
+
+  &__item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-top: 26px;
+
+    strong {
+      font-size: 19px;
+      color: var(--c-ink);
+      line-height: 1.35;
+    }
+
+    p {
+      margin-top: 2px;
+      font-size: 15.5px;
+      color: var(--c-muted);
+    }
+  }
+
+  @include mobile {
+    padding: 28px;
+  }
+}
+
+// Missão e visão
+.statement {
+  padding: 44px;
+  border-left: 5px solid var(--c-blue);
+
+  &--green {
+    border-left-color: var(--c-green);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    h2 {
+      font-size: 28px;
+    }
+  }
+
+  p {
+    margin-top: 18px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  @include mobile {
+    padding: 28px;
+  }
+}
+
+.values {
+  margin-top: 52px;
+}
+
+// Dados cadastrais
+.company {
+  grid-template-columns: 1fr 1.3fr;
+  gap: 64px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  &__facts {
+    gap: 16px;
+  }
+
+  &__fact {
+    padding: 24px;
+
+    dt {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+
+    dd {
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--c-ink);
+    }
+  }
+}
+
+.spacer {
+  height: var(--section-y);
+}

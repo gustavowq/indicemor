@@ -1,0 +1,82 @@
+<app-page-hero
+  breadcrumb="Notícias"
+  eyebrow="Blog"
+  title="Notícias"
+  lead="Conteúdos sobre gestão pública municipal, inteligência fiscal e índices de participação."
+>
+  <!-- Busca -->
+  <form class="search" role="search" (submit)="$event.preventDefault()">
+    <app-icon name="search" [size]="20" />
+    <label for="busca" class="sr-only">Buscar notícias</label>
+    <input
+      id="busca"
+      type="search"
+      placeholder="Buscar notícias…"
+      [value]="query()"
+      (input)="onSearch($event)"
+    />
+    <button type="submit" class="btn btn--blue btn--sm">Buscar</button>
+  </form>
+</app-page-hero>
+
+<section class="section">
+  <div class="container">
+    <!-- PUBLICAÇÃO EM DESTAQUE -->
+    @if (featured(); as post) {
+      <article class="card featured">
+        <div class="featured__cover">
+          <span class="tag tag--green tag--white featured__badge">Destaque</span>
+          <svg viewBox="0 0 320 190" class="featured__art" aria-hidden="true">
+            <circle
+              cx="95"
+              cy="95"
+              r="72"
+              fill="none"
+              stroke="rgba(255,255,255,.9)"
+              stroke-width="3"
+            />
+            <path d="M95 23 A72 72 0 0 1 165 113 L95 95Z" fill="#00A92D" />
+            <text x="190" y="80" font-size="46" font-weight="900" fill="#fff">25%</text>
+            <text x="190" y="106" font-size="15" fill="#DCE8F7">de toda a arrecadação</text>
+            <text x="190" y="125" font-size="15" fill="#DCE8F7">estadual no país</text>
+          </svg>
+        </div>
+        <div class="featured__body">
+          <span class="tag">{{ post.category }}</span>
+          <h2 class="featured__title">{{ post.title }}</h2>
+          <p>{{ post.excerpt }}</p>
+          <time [attr.datetime]="post.date"
+            ><app-icon name="calendar" [size]="15" />
+            {{ post.date | date: "d 'de' MMMM 'de' y" }}</time
+          >
+          <a class="btn btn--blue btn--sm" [href]="post.url"
+            >Leia mais <app-icon name="arrow-right" [size]="16"
+          /></a>
+        </div>
+      </article>
+    }
+
+    <!-- DEMAIS PUBLICAÇÕES -->
+    @for (post of others(); track post.slug) {
+      <article class="card post">
+        <div class="post__cover"><app-icon name="landmark" [size]="60" [strokeWidth]="1.5" /></div>
+        <div class="post__body">
+          <span class="tag tag--green">{{ post.category }}</span>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt }}</p>
+          <div class="post__footer">
+            <time [attr.datetime]="post.date"
+              ><app-icon name="calendar" [size]="14" />
+              {{ post.date | date: "d 'de' MMMM 'de' y" }}</time
+            >
+            <a [href]="post.url">Leia mais <app-icon name="arrow-right" [size]="16" /></a>
+          </div>
+        </div>
+      </article>
+    }
+
+    @if (!featured() && others().length === 0) {
+      <p class="empty">Nenhuma notícia encontrada para “{{ query() }}”.</p>
+    }
+  </div>
+</section>

@@ -1,0 +1,77 @@
+<app-page-hero
+  breadcrumb="Prefeituras"
+  eyebrow="Prefeituras"
+  title="Nossas soluções para prefeituras."
+  lead="Acreditamos que a gestão pública eficiente e transparente é a chave para o desenvolvimento sustentável de qualquer município."
+/>
+
+<!-- PREFEITURAS ATENDIDAS -->
+<section class="section">
+  <div class="container">
+    <div class="text-center">
+      <span class="eyebrow">Prefeituras que atendemos</span>
+      <h2 class="title-xl">Municípios que confiam na ÍndiceMor.</h2>
+    </div>
+
+    <ul class="clients">
+      @for (p of prefeituras; track p.slug) {
+        <li class="card client">
+          <div class="client__logo">
+            <img
+              [ngSrc]="p.logo"
+              [width]="p.logoWidth"
+              [height]="p.logoHeight"
+              [alt]="'Prefeitura de ' + p.name"
+            />
+          </div>
+          <strong>{{ p.name }}</strong>
+          <span>{{ stateNames[p.uf] }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- MISSÃO COM AS PREFEITURAS + COMO APOIAMOS -->
+<section class="section section--surface">
+  <div class="container split split--start">
+    <div>
+      <span class="eyebrow">Nossa missão com as prefeituras</span>
+      <h2 class="title-xl">
+        Soluções inteligentes, práticas e que fazem a diferença no dia a dia.
+      </h2>
+      @for (p of paragraphs; track $index) {
+        <p class="text-muted mission__p">{{ p }}</p>
+      }
+    </div>
+
+    <div>
+      <span class="support__label">Como apoiamos as prefeituras</span>
+      <ul class="support">
+        @for (item of supportItems; track item.title; let i = $index) {
+          <li class="card support__item">
+            <span class="icon-box" [class.icon-box--green]="i % 2 === 0"
+              ><app-icon [name]="item.icon" [size]="22"
+            /></span>
+            <strong>{{ item.title }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COMPROMISSO -->
+<section class="section section--tight">
+  <div class="container commitment text-center">
+    <span class="icon-box icon-box--green icon-box--lg"><app-icon name="scale" [size]="28" /></span>
+    <p>{{ commitment }}</p>
+  </div>
+</section>
+
+<app-cta-band
+  title="Junte-se a nós."
+  text="Faça parte do grupo de prefeituras que já estão transformando a administração pública com soluções inovadoras e eficientes."
+  secondaryPath="/servicos"
+  secondaryLabel="Conheça nossos serviços"
+/>

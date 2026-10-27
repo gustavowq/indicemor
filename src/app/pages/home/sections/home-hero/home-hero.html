@@ -1,0 +1,86 @@
+<!-- HERO DA PÁGINA INICIAL -->
+<section class="hero">
+  <div class="container hero__grid">
+    <!-- Texto e ações -->
+    <div class="hero__content">
+      <span class="eyebrow eyebrow--light">Assessoria Contábil e Financeira</span>
+      <h1 class="hero__title">
+        Inteligência fiscal para <span class="hero__highlight">ampliar a receita</span> do seu
+        município.
+      </h1>
+      <p class="hero__lead">
+        Somos especializados em soluções estratégicas para a gestão pública municipal: apoiamos
+        prefeituras na modernização administrativa, na otimização de recursos e na melhoria dos
+        serviços prestados à população.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" [routerLink]="quote.path"
+          >{{ quote.label }} <app-icon name="arrow-right" [size]="18"
+        /></a>
+        <a class="btn btn--outline-light" routerLink="/servicos">Conheça nossos serviços</a>
+      </div>
+
+      <ul class="hero__pillars">
+        @for (pillar of pillars; track pillar.title) {
+          <li><app-icon [name]="pillar.icon" [size]="18" /> {{ pillar.title }}</li>
+        }
+      </ul>
+    </div>
+
+    <!-- Cartão ilustrativo do índice -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="index-card bracket">
+        <div class="index-card__head">
+          <div>
+            <span class="index-card__kicker">Inteligência fiscal aplicada</span>
+            <span class="index-card__title">Índice de Participação dos Municípios</span>
+          </div>
+          <span class="icon-box icon-box--green icon-box--sm"
+            ><app-icon name="trending-up" [size]="22"
+          /></span>
+        </div>
+
+        <svg class="index-card__chart" viewBox="0 0 460 170">
+          <defs>
+            <linearGradient id="heroArea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#008D00" stop-opacity=".2" />
+              <stop offset="1" stop-color="#008D00" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g stroke="#EDF1F5">
+            <line x1="0" y1="20" x2="460" y2="20" />
+            <line x1="0" y1="62" x2="460" y2="62" />
+            <line x1="0" y1="104" x2="460" y2="104" />
+            <line x1="0" y1="146" x2="460" y2="146" />
+          </g>
+          <path
+            d="M8 128 C80 124 120 118 170 110 S260 82 300 70 S400 34 452 24 L452 146 L8 146Z"
+            fill="url(#heroArea)"
+          />
+          <path
+            d="M8 128 C80 124 120 118 170 110 S260 82 300 70 S400 34 452 24"
+            fill="none"
+            stroke="#008D00"
+            stroke-width="3.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M8 128 C120 126 260 124 452 122"
+            fill="none"
+            stroke="#9AA7B6"
+            stroke-width="2.4"
+            stroke-dasharray="6 6"
+          />
+          <circle cx="452" cy="24" r="7" fill="#fff" stroke="#008D00" stroke-width="3.5" />
+        </svg>
+
+        <ul class="index-card__items">
+          @for (item of cardItems; track item.title) {
+            <li><app-icon [name]="item.icon" [size]="18" /> {{ item.title }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

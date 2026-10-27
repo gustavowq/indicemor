@@ -1,0 +1,41 @@
+// =============================================================================
+// MIXINS
+// Atalhos de responsividade e padrões visuais reutilizados pelos componentes.
+// =============================================================================
+@use 'tokens' as *;
+
+@mixin mobile {
+  @media (max-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet-down {
+  @media (max-width: $bp-tablet) {
+    @content;
+  }
+}
+
+// Grade quadriculada sutil usada sobre fundos azuis (hero, CTA, vídeo)
+@mixin grid-pattern($opacity: 0.06, $size: 48px) {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, $opacity) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, $opacity) 1px, transparent 1px);
+  background-size: $size $size;
+}
+
+// Cantoneira verde em "L" inspirada na logo
+@mixin bracket-corner($pos: top-right, $w: 300px, $h: 180px, $stroke: 4px) {
+  content: '';
+  position: absolute;
+  width: $w;
+  height: $h;
+  pointer-events: none;
+  @if $pos == top-right {
+    border-top: $stroke solid var(--c-green-bright);
+    border-right: $stroke solid var(--c-green-bright);
+  } @else {
+    border-bottom: $stroke solid var(--c-green-bright);
+    border-left: $stroke solid var(--c-green-bright);
+  }
+}

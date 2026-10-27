@@ -1,0 +1,63 @@
+@use 'mixins' as *;
+
+.cta {
+  padding-bottom: var(--section-y);
+
+  &__box {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 68px;
+    border-radius: var(--radius-lg);
+    background: var(--g-brand);
+
+    // Cantoneira verde decorativa
+    &::before {
+      @include bracket-corner(top-right, 260px, 110px);
+      right: 40px;
+      top: 28px;
+      opacity: 0.55;
+    }
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+
+    p {
+      margin-top: 12px;
+      max-width: 640px;
+      font-size: 18px;
+      color: var(--c-on-dark);
+    }
+  }
+
+  &__title {
+    max-width: 660px;
+    font-size: 36px;
+    color: var(--c-white);
+  }
+
+  &__actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @include mobile {
+    &__box {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 36px 24px;
+    }
+
+    &__title {
+      font-size: 27px;
+    }
+  }
+}

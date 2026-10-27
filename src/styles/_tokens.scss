@@ -1,0 +1,53 @@
+// =============================================================================
+// TOKENS DE DESIGN
+// Cores extraídas da logo original da ÍndiceMor (preto, azul e verde),
+// tipografia Lato (mesma do site atual) e escalas de espaçamento/raio.
+// =============================================================================
+
+// Breakpoints usados pelos mixins de responsividade
+$bp-mobile: 600px;
+$bp-tablet: 1024px;
+
+:root {
+  // --- Cores da marca (logo) ---
+  --c-blue: #005cbd;
+  --c-blue-dark: #004a99;
+  --c-blue-deep: #003670;
+  --c-blue-soft: #e8f1fb;
+  --c-green: #008d00;
+  --c-green-bright: #00a92d;
+  --c-green-light: #7be08a;
+  --c-green-soft: #e7f5e8;
+  --c-black: #0b0e12;
+
+  // --- Neutros ---
+  --c-ink: #0d1117;
+  --c-text: #2b323b;
+  --c-muted: #5a6573;
+  --c-line: #e2e7ee;
+  --c-surface: #f5f8fb;
+  --c-white: #ffffff;
+  --c-on-dark: #dce8f7;
+  --c-on-black: #a3adb9;
+
+  // --- Gradiente institucional ---
+  --g-brand: linear-gradient(120deg, var(--c-blue) 0%, var(--c-blue-deep) 100%);
+
+  // --- Tipografia ---
+  --font-base: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  // --- Layout ---
+  --container: 1200px;
+  --gutter: 32px;
+  --section-y: 100px;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow-card: 0 24px 50px -30px rgba(0, 30, 70, 0.45);
+  --shadow-float: 0 40px 80px -40px rgba(0, 30, 70, 0.5);
+
+  @media (max-width: $bp-mobile) {
+    --gutter: 20px;
+    --section-y: 64px;
+  }
+}

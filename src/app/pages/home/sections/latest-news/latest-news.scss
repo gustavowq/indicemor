@@ -1,0 +1,56 @@
+.news-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+
+  &__cover {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--g-brand);
+    color: rgba(255, 255, 255, 0.92);
+
+    &--green {
+      background: linear-gradient(130deg, var(--c-green), #00521a);
+    }
+  }
+
+  &__tag {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+  }
+
+  &__body {
+    padding: 26px 28px;
+
+    h3 {
+      margin: 8px 0 10px;
+    }
+
+    p {
+      font-size: 15.5px;
+    }
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--c-muted);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--c-blue);
+  }
+}

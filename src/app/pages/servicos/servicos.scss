@@ -1,0 +1,217 @@
+@use 'mixins' as *;
+
+.service-shortcuts {
+  margin-top: 32px;
+
+  .chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Faixa preta com a frase de impacto
+.impact-strip {
+  background: var(--c-black);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+
+  &__main {
+    flex: 1;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--c-white);
+
+    span {
+      color: var(--c-green-light);
+    }
+  }
+
+  &__aside {
+    max-width: 360px;
+    font-size: 16px;
+    color: var(--c-on-black);
+  }
+
+  @include mobile {
+    &__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    &__main {
+      font-size: 18px;
+    }
+  }
+}
+
+// Cabeçalho de cada categoria
+.category {
+  border-bottom: 1px solid var(--c-line);
+  background: var(--c-white);
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    p {
+      color: var(--c-muted);
+      font-size: 16px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+  }
+}
+
+// Bloco de cada serviço
+.service {
+  padding: 92px 0;
+
+  @include mobile {
+    padding: 64px 0;
+  }
+
+  // Inverte a ordem (lista à esquerda) nos serviços pares, só no desktop
+  &--reverse .service__text {
+    order: 2;
+
+    @include mobile {
+      order: 0;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__name {
+    margin: 20px 0 18px;
+    font-size: 44px;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  &__full {
+    margin: -14px 0 18px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--c-blue);
+
+    &--green {
+      color: var(--c-green);
+    }
+  }
+
+  &__desc {
+    font-size: 17.5px;
+    color: var(--c-muted);
+
+    &--soon {
+      font-style: italic;
+    }
+  }
+
+  &__cta {
+    margin-top: 28px;
+  }
+}
+
+// Lista de destaques
+.highlights {
+  padding: 40px;
+  border: 1px solid var(--c-line);
+  border-radius: 16px;
+  background: var(--c-white);
+
+  &__title {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-green);
+
+    &--blue {
+      color: var(--c-blue);
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: 14px;
+    margin-top: 22px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 10px;
+      background: var(--c-surface);
+      font-weight: 700;
+      color: var(--c-ink);
+      line-height: 1.4;
+    }
+  }
+
+  &__check {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-green);
+    color: var(--c-white);
+
+    &--blue {
+      background: var(--c-blue);
+    }
+  }
+
+  // Estado "em breve" (serviço sem descrição cadastrada)
+  &__soon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 36px 12px;
+    border: 2px dashed #cad3de;
+    border-radius: 12px;
+    text-align: center;
+
+    strong {
+      font-size: 20px;
+      color: var(--c-ink);
+    }
+
+    p {
+      color: var(--c-muted);
+      font-size: 15.5px;
+    }
+  }
+
+  @include mobile {
+    padding: 24px;
+  }
+}
+
+.spacer {
+  height: 20px;
+}

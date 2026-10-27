@@ -1,0 +1,32 @@
+<!-- Vídeo institucional: capa + player carregado ao clicar -->
+<div class="video">
+  @if (playing()) {
+    <iframe
+      class="video__frame"
+      [src]="embedUrl()"
+      [title]="title()"
+      allow="
+        accelerometer;
+        autoplay;
+        clipboard-write;
+        encrypted-media;
+        gyroscope;
+        picture-in-picture;
+      "
+      allowfullscreen
+    ></iframe>
+  } @else {
+    <button
+      type="button"
+      class="video__poster"
+      (click)="play()"
+      [attr.aria-label]="'Reproduzir vídeo: ' + title()"
+    >
+      <span class="video__play"><app-icon name="play" [size]="34" /></span>
+      <span class="video__caption">
+        <span class="eyebrow eyebrow--light">{{ eyebrow() }}</span>
+        <span class="video__title">{{ title() }}</span>
+      </span>
+    </button>
+  }
+</div>

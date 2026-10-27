@@ -1,0 +1,93 @@
+<!-- Rodapé -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <!-- Marca -->
+      <div class="footer__brand">
+        <img
+          class="footer__logo"
+          ngSrc="images/logo-indicemor.webp"
+          width="156"
+          height="72"
+          alt="ÍndiceMor Assessoria"
+        />
+        <p>{{ company.shortDescription }}</p>
+        <div class="footer__social">
+          @if (company.social.instagram) {
+            <a
+              [href]="company.social.instagram"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram"
+              ><app-icon name="instagram" [size]="18"
+            /></a>
+          }
+          @if (company.social.linkedin) {
+            <a [href]="company.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"
+              ><app-icon name="linkedin" [size]="18"
+            /></a>
+          }
+          <a [href]="company.whatsappHref" target="_blank" rel="noopener" aria-label="WhatsApp"
+            ><app-icon name="message-circle" [size]="18"
+          /></a>
+        </div>
+      </div>
+
+      <!-- Links úteis -->
+      <nav aria-label="Links úteis">
+        <h2 class="footer__title">Links úteis</h2>
+        <ul class="footer__links">
+          @for (link of links; track link.path) {
+            <li>
+              <a [routerLink]="link.path">{{ link.label }}</a>
+            </li>
+          }
+          <li><a [href]="company.loginUrl" target="_blank" rel="noopener">Login</a></li>
+        </ul>
+      </nav>
+
+      <!-- Serviços -->
+      <nav aria-label="Serviços">
+        <h2 class="footer__title">Serviços</h2>
+        <ul class="footer__list">
+          @for (service of services; track service.slug) {
+            <li>
+              <a routerLink="/servicos" [fragment]="service.slug">{{ service.name }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <!-- Contato -->
+      <div>
+        <h2 class="footer__title">Contato</h2>
+        <ul class="footer__contact">
+          <li>
+            <app-icon name="phone" [size]="16" /><a [href]="company.phoneHref">{{
+              company.phoneDisplay
+            }}</a>
+          </li>
+          <li>
+            <app-icon name="mail" [size]="16" /><a [href]="'mailto:' + company.email">{{
+              company.email
+            }}</a>
+          </li>
+          <li>
+            <app-icon name="map-pin" [size]="16" />
+            <a [href]="company.address.mapsUrl" target="_blank" rel="noopener">
+              {{ company.address.street }}, {{ company.address.complement }},
+              <span class="nowrap">CEP {{ company.address.zip }}</span>
+            </a>
+          </li>
+          <li><app-icon name="clock" [size]="16" /> {{ company.hours.weekdays }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Linha final -->
+    <div class="footer__bottom">
+      <span>{{ company.legalName }} · CNPJ {{ company.cnpj }}</span>
+      <span>© {{ year }} Todos os direitos reservados</span>
+    </div>
+  </div>
+</footer>

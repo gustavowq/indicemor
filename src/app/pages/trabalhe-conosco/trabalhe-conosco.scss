@@ -1,0 +1,60 @@
+@use 'mixins' as *;
+
+.careers {
+  grid-template-columns: 1fr 1.25fr;
+  gap: 72px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  &__areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  &__area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+
+    strong {
+      color: var(--c-ink);
+    }
+  }
+
+  &__values {
+    margin-top: 44px;
+    padding: 28px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: var(--c-white);
+
+    strong {
+      font-size: 18px;
+      color: var(--c-ink);
+    }
+
+    p {
+      margin-top: 8px;
+      font-size: 15.5px;
+      color: var(--c-muted);
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.text-green {
+  color: var(--c-green);
+}
+
+.text-blue {
+  color: var(--c-blue);
+}

@@ -1,0 +1,208 @@
+<app-page-hero
+  breadcrumb="Contato"
+  eyebrow="Contato"
+  title="Fale com a ÍndiceMor."
+  lead="Atendimento de segunda a sexta, das 08:00 às 18:00, por WhatsApp, telefone, e-mail ou presencialmente no Trade Center, em Goiânia."
+/>
+
+<section class="section section--flush-top">
+  <div class="container">
+    <!-- CANAIS DE ATENDIMENTO -->
+    <ul class="grid grid--4 channels">
+      @for (c of channels; track c.label) {
+        <li>
+          @if (c.href) {
+            <a
+              class="card card--elevated channel"
+              [href]="c.href"
+              [attr.target]="c.href.startsWith('http') ? '_blank' : null"
+              rel="noopener"
+            >
+              <span class="icon-box" [class.icon-box--green]="c.green"
+                ><app-icon [name]="c.icon" [size]="24"
+              /></span>
+              <span class="channel__label">{{ c.label }}</span>
+              <strong class="channel__value">{{ c.value }}</strong>
+            </a>
+          } @else {
+            <div class="card card--elevated channel">
+              <span class="icon-box" [class.icon-box--green]="c.green"
+                ><app-icon [name]="c.icon" [size]="24"
+              /></span>
+              <span class="channel__label">{{ c.label }}</span>
+              <strong class="channel__value">{{ c.value }}</strong>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+
+    <div class="contact">
+      <!-- FORMULÁRIO "ENVIE UM E-MAIL" -->
+      <form class="card form-card" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <h2 class="form-card__title">Envie um e-mail</h2>
+        <p class="form-card__hint">Campos com * são obrigatórios.</p>
+
+        <div class="form-grid">
+          <div class="field" [class.field--invalid]="error('nome')">
+            <label for="m-nome">Nome *</label>
+            <input
+              id="m-nome"
+              type="text"
+              formControlName="nome"
+              placeholder="Seu nome"
+              autocomplete="name"
+            />
+            @if (error('nome'); as msg) {
+              <span class="field__error">{{ msg }}</span>
+            }
+          </div>
+          <div class="field" [class.field--invalid]="error('telefone')">
+            <label for="m-tel">Telefone *</label>
+            <input
+              id="m-tel"
+              type="tel"
+              formControlName="telefone"
+              mask="(00) 0000-00009"
+              placeholder="(62) 99999-9999"
+              autocomplete="tel"
+            />
+            @if (error('telefone'); as msg) {
+              <span class="field__error">{{ msg }}</span>
+            }
+          </div>
+          <div class="field" [class.field--invalid]="error('email')">
+            <label for="m-email">E-mail *</label>
+            <input
+              id="m-email"
+              type="email"
+              formControlName="email"
+              placeholder="seu@email.com"
+              autocomplete="email"
+            />
+            @if (error('email'); as msg) {
+              <span class="field__error">{{ msg }}</span>
+            }
+          </div>
+          <div class="field" [class.field--invalid]="error('assunto')">
+            <label for="m-assunto">Assunto *</label>
+            <input
+              id="m-assunto"
+              type="text"
+              formControlName="assunto"
+              placeholder="Como podemos ajudar?"
+            />
+            @if (error('assunto'); as msg) {
+              <span class="field__error">{{ msg }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="field form-row" [class.field--invalid]="error('mensagem')">
+          <label for="m-msg">Mensagem *</label>
+          <textarea id="m-msg" formControlName="mensagem" placeholder="Mensagem"></textarea>
+          @if (error('mensagem'); as msg) {
+            <span class="field__error">{{ msg }}</span>
+          }
+        </div>
+
+        <button type="submit" class="btn btn--blue form-row" [disabled]="state() === 'sending'">
+          {{ state() === 'sending' ? 'Enviando…' : 'Enviar' }} <app-icon name="send" [size]="18" />
+        </button>
+
+        @if (state() === 'success') {
+          <p class="form-feedback form-feedback--success" role="status">
+            <app-icon name="check-circle" [size]="20" /> Mensagem enviada! Retornaremos em breve.
+          </p>
+        } @else if (state() === 'error') {
+          <p class="form-feedback form-feedback--error" role="alert">
+            <app-icon name="alert-triangle" [size]="20" /> Não foi possível enviar agora. Tente
+            novamente ou fale pelo WhatsApp.
+          </p>
+        }
+      </form>
+
+      <!-- LOCALIZAÇÃO, HORÁRIOS E REDES -->
+      <div class="contact__side">
+        <div class="map">
+          <!-- Mapa ilustrativo (leve). O botão abre a localização real no Google Maps. -->
+          <svg
+            class="map__art"
+            viewBox="0 0 520 340"
+            preserveAspectRatio="xMidYMid slice"
+            aria-hidden="true"
+          >
+            <rect width="520" height="340" fill="#EAF0F5" />
+            <g stroke="#fff" stroke-width="14" fill="none">
+              <path d="M-10 110 L540 80" />
+              <path d="M-10 260 L540 230" />
+              <path d="M140 -10 L170 400" />
+              <path d="M360 -10 L330 400" />
+            </g>
+            <g stroke="#fff" stroke-width="6" fill="none">
+              <path d="M-10 185 L540 160" />
+              <path d="M60 -10 L80 400" />
+              <path d="M250 -10 L255 400" />
+              <path d="M450 -10 L430 400" />
+            </g>
+            <rect x="270" y="110" width="50" height="38" rx="4" fill="#D4EBD6" />
+            <rect x="180" y="196" width="60" height="28" rx="4" fill="#D4EBD6" />
+          </svg>
+          <div class="map__pin">
+            <div class="map__label">
+              <strong>ÍndiceMor</strong><span>Trade Center · Sala 09</span>
+            </div>
+            <span class="map__marker"></span>
+          </div>
+          <a
+            class="btn btn--white btn--sm map__btn"
+            [href]="company.address.mapsUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            <app-icon name="map-pin" [size]="16" /> Abrir no Google Maps
+          </a>
+        </div>
+
+        <div class="card info">
+          <h3>Localização</h3>
+          <address>
+            {{ company.address.street }}, {{ company.address.complement }}, CEP
+            {{ company.address.zip }}
+          </address>
+
+          <hr />
+          <h3>Horários de funcionamento</h3>
+          <dl class="info__hours">
+            <div>
+              <dt>Segunda a sexta</dt>
+              <dd>08:00 às 18:00</dd>
+            </div>
+            <div>
+              <dt>Sábado e domingo</dt>
+              <dd>Fechado</dd>
+            </div>
+          </dl>
+
+          <hr />
+          <h3>Redes sociais</h3>
+          <div class="chips">
+            @if (company.social.instagram) {
+              <a class="chip" [href]="company.social.instagram" target="_blank" rel="noopener"
+                ><app-icon name="instagram" [size]="16" /> Instagram</a
+              >
+            }
+            @if (company.social.linkedin) {
+              <a class="chip" [href]="company.social.linkedin" target="_blank" rel="noopener"
+                ><app-icon name="linkedin" [size]="16" /> LinkedIn</a
+              >
+            }
+            <a class="chip" [href]="company.whatsappHref" target="_blank" rel="noopener"
+              ><app-icon name="message-circle" [size]="16" /> WhatsApp</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

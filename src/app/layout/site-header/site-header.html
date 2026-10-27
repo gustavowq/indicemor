@@ -1,0 +1,76 @@
+<!-- Cabeçalho principal -->
+<header class="header">
+  <div class="container header__inner">
+    <a routerLink="/" class="header__logo" aria-label="ÍndiceMor — página inicial">
+      <img
+        ngSrc="images/logo-indicemor.webp"
+        width="156"
+        height="72"
+        alt="ÍndiceMor Assessoria"
+        priority
+      />
+    </a>
+
+    <!-- Menu principal (desktop) -->
+    <nav class="header__nav" aria-label="Menu principal">
+      @for (item of nav; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+          >{{ item.label }}</a
+        >
+      }
+    </nav>
+
+    <!-- Ações: área do cliente e cotação -->
+    <div class="header__actions">
+      <a class="btn btn--outline btn--xs" [href]="company.loginUrl" target="_blank" rel="noopener">
+        <app-icon name="lock" [size]="15" /> Login
+      </a>
+      <a class="btn btn--primary btn--xs" [routerLink]="quote.path" routerLinkActive="is-current">
+        {{ quote.label }} <app-icon name="arrow-right" [size]="16" />
+      </a>
+    </div>
+
+    <!-- Botão do menu (celular) -->
+    <button
+      type="button"
+      class="header__burger"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-menu"
+      [attr.aria-label]="menuOpen() ? 'Fechar menu' : 'Abrir menu'"
+    >
+      <app-icon [name]="menuOpen() ? 'x' : 'menu'" [size]="22" />
+    </button>
+  </div>
+
+  <!-- Painel do menu (celular) -->
+  @if (menuOpen()) {
+    <div id="mobile-menu" class="mobile-menu">
+      <nav class="container mobile-menu__nav" aria-label="Menu principal">
+        @for (item of nav; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+          >
+            {{ item.label }}
+          </a>
+        }
+        <a class="btn btn--primary btn--block" [routerLink]="quote.path">{{ quote.label }}</a>
+        <a
+          class="btn btn--outline btn--block"
+          [href]="company.loginUrl"
+          target="_blank"
+          rel="noopener"
+          >Login</a
+        >
+        <a class="mobile-menu__contact" [href]="company.phoneHref"
+          ><app-icon name="phone" [size]="16" /> {{ company.phoneDisplay }}</a
+        >
+      </nav>
+    </div>
+  }
+</header>

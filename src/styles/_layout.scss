@@ -1,0 +1,203 @@
+// =============================================================================
+// LAYOUT
+// Container, seções, grades e títulos de seção compartilhados por todas as páginas.
+// =============================================================================
+@use 'mixins' as *;
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  padding: var(--section-y) 0;
+
+  &--surface {
+    background: var(--c-surface);
+  }
+
+  &--tight {
+    padding: 80px 0;
+    @include mobile {
+      padding: 56px 0;
+    }
+  }
+
+  &--flush-top {
+    padding-top: 0;
+  }
+}
+
+// --- Grades ---
+.grid {
+  display: grid;
+  gap: 24px;
+
+  &--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  &--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include tablet-down {
+    &--3,
+    &--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @include mobile {
+    &--2,
+    &--3,
+    &--4 {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Duas colunas com texto + elemento visual
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+
+  &--start {
+    align-items: start;
+  }
+
+  @include tablet-down {
+    gap: 48px;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+// --- Cabeçalho de seção (sobretítulo + título + texto de apoio) ---
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-blue);
+
+  &::before {
+    content: '';
+    width: 22px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--c-green);
+  }
+
+  &--light {
+    color: var(--c-white);
+    &::before {
+      background: var(--c-green-bright);
+    }
+  }
+}
+
+.title-xl {
+  font-size: 42px;
+  line-height: 1.15;
+  margin: 14px 0 18px;
+
+  @include mobile {
+    font-size: 30px;
+  }
+}
+
+.lead {
+  font-size: 19px;
+  color: var(--c-muted);
+  max-width: 700px;
+
+  @include mobile {
+    font-size: 17px;
+  }
+}
+
+.text-muted {
+  color: var(--c-muted);
+}
+
+.text-center {
+  text-align: center;
+
+  .lead {
+    margin-inline: auto;
+  }
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 46px;
+
+  .title-xl {
+    margin-bottom: 0;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+// Cantoneiras verdes da logo aplicadas a qualquer bloco
+.bracket {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 38%;
+    height: 42%;
+    pointer-events: none;
+  }
+
+  &::before {
+    right: -14px;
+    top: -14px;
+    border-top: 3px solid var(--c-green);
+    border-right: 3px solid var(--c-green);
+  }
+
+  &::after {
+    left: -14px;
+    bottom: -14px;
+    border-bottom: 3px solid var(--c-green);
+    border-left: 3px solid var(--c-green);
+  }
+
+  @include mobile {
+    &::before {
+      right: -8px;
+      top: -8px;
+    }
+    &::after {
+      left: -8px;
+      bottom: -8px;
+    }
+  }
+}
+
+// Evita que conteúdo largo (SVG, textos longos) estoure a largura das colunas
+.grid > *,
+.split > * {
+  min-width: 0;
+}

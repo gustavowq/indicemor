@@ -1,0 +1,35 @@
+<!-- QUEM SOMOS (resumo na página inicial) -->
+<section class="section">
+  <div class="container split about">
+    <!-- Citação com as cantoneiras da logo -->
+    <figure class="about__quote bracket">
+      <span class="icon-box icon-box--green icon-box--lg"
+        ><app-icon name="landmark" [size]="28"
+      /></span>
+      <blockquote>
+        “Mais do que prestadores de serviço, somos parceiros da gestão pública.”
+      </blockquote>
+      <figcaption>{{ partnership }}</figcaption>
+    </figure>
+
+    <!-- Texto institucional -->
+    <div>
+      <span class="eyebrow">Quem somos</span>
+      <h2 class="title-xl">Profundo entendimento da realidade dos municípios.</h2>
+      <p class="text-muted about__p">{{ intro }}</p>
+      <p class="text-muted about__p">{{ commitment }}</p>
+
+      <ul class="check-list about__list">
+        @for (item of differentials; track item) {
+          <li>
+            <app-icon name="check" [size]="18" /> <strong>{{ item }}</strong>
+          </li>
+        }
+      </ul>
+
+      <a class="btn btn--outline about__cta" routerLink="/quem-somos"
+        >Conheça a ÍndiceMor <app-icon name="arrow-right" [size]="18"
+      /></a>
+    </div>
+  </div>
+</section>

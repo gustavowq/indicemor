@@ -1,0 +1,32 @@
+<!-- ESTADOS QUE ATENDEMOS -->
+<section class="section section--surface">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">Estados que atendemos</span>
+      <h2 class="title-xl">Atuação em Goiás e Mato Grosso.</h2>
+      <p class="lead states__lead">Conheça as prefeituras que atendemos em cada estado.</p>
+
+      @for (state of states; track state.uf) {
+        <div class="card states__card">
+          <div class="states__head">
+            <h3>{{ state.name }}</h3>
+            <span class="tag tag--green">{{ state.uf }}</span>
+          </div>
+          <ul class="chips">
+            @for (p of state.prefeituras; track p.slug) {
+              <li class="chip"><app-icon name="landmark" [size]="15" /> {{ p.name }}</li>
+            }
+          </ul>
+        </div>
+      }
+
+      <a class="btn btn--blue states__cta" routerLink="/prefeituras"
+        >Ver prefeituras <app-icon name="arrow-right" [size]="18"
+      /></a>
+    </div>
+
+    <div class="states__map">
+      <app-brazil-map [highlighted]="highlighted" />
+    </div>
+  </div>
+</section>
